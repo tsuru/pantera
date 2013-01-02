@@ -1,4 +1,6 @@
 language: python
 python:
-  install: make deps
-  script: make test
+install:
+  - pip install --use-mirrors nose
+  - make deps
+script: make test
