@@ -14,7 +14,7 @@ def destroy_vm(access, secret):
     destroy a vm
     """
     conn = connect(access, secret)
-    return conn.terminate_instances(instance_ids=[])
+    return conn.terminate_instances(instance_ids=[choice_vm(access, secret)])
 
 
 def choice_vm(access, secret):
