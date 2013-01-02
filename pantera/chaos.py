@@ -1,5 +1,3 @@
-from boto.ec2.connection import EC2Connection
-
 import random
 
 
@@ -7,6 +5,7 @@ def connect(access, secret):
     """
     creates an ec2 connection
     """
+    from boto.ec2.connection import EC2Connection
     return EC2Connection(access, secret)
 
 
