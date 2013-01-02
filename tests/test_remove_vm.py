@@ -10,5 +10,5 @@ class RemoveVmTestCase(unittest.TestCase):
             instance.terminate_instances.return_value = vms
             conn.return_value = instance
             from pantera import chaos
-            destroyed = chaos.destroy_vm()
+            destroyed = chaos.destroy_vm("access", "secret")
         self.assertListEqual(vms, destroyed)

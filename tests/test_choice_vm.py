@@ -9,5 +9,5 @@ class ChooseVmTestCase(unittest.TestCase):
             with mock.patch("random.choice") as choice:
                 from pantera import chaos
                 choice.return_value = expected
-                vm = chaos.choice_vm()
+                vm = chaos.choice_vm("access", "secret")
         self.assertEqual(expected, vm)

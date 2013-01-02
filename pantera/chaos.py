@@ -9,18 +9,18 @@ def connect(access, secret):
     return EC2Connection(access, secret)
 
 
-def destroy_vm():
+def destroy_vm(access, secret):
     """
     destroy a vm
     """
-    conn = connect("access", "secret")
+    conn = connect(access, secret)
     return conn.terminate_instances(instance_ids=[])
 
 
-def choice_vm():
+def choice_vm(access, secret):
     """
     choice a vm
     """
-    conn = connect("access", "secret")
+    conn = connect(access, secret)
     vms = conn.get_all_instances()
     return random.choice(vms)
