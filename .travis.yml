@@ -1,0 +1,4 @@
+language: python
+python:
+  install: make deps
+  script: make test
