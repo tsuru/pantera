@@ -10,5 +10,5 @@ class ChooseVmTestCase(unittest.TestCase):
             with mock.patch("random.choice") as choice:
                 from pantera import chaos
                 choice.return_value = reservation
-                vm = chaos.choice_vm("access", "secret")
+                vm = chaos.choice_vm(conn)
         self.assertEqual("1", vm)
