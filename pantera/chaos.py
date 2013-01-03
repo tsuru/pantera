@@ -31,7 +31,7 @@ class Terminate(EC2):
         vm = self.choice()
         return self.conn.terminate_instances(instance_ids=[vm])
 
-    def execute(self):
+    def __call__(self):
         self.terminate()
 
 
@@ -44,5 +44,18 @@ class Stop(EC2):
         vm = self.choice()
         return self.conn.stop_instances(instance_ids=[vm])
 
-    def execute(self):
+    def __call__(self):
         self.stop()
+
+
+class Reboot(EC2):
+    def reboot(self):
+        """
+        reboots a vm
+        """
+        self.connect()
+        vm = self.choice()
+        return self.conn.reboot_instances(instance_ids=[vm])
+
+    def __call__(self):
+        self.reboot()
