@@ -2,6 +2,33 @@ import unittest
 import mock
 
 from pantera import chaos
+import pantera
+
+
+class SimulatorCalled(Exception):
+    pass
+
+
+class RaisingSimulator(object):
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def __call__(self, *args, **kwargs):
+        raise SimulatorCalled
+
+
+class PanterTestCase(unittest.TestCase):
+    @mock.patch("random.choice")
+    def test_run_call(self, choice):
+        choice.return_value = RaisingSimulator
+        self.assertRaises(SimulatorCalled, pantera.run)
+
+    @mock.patch("random.choice")
+    def test_run_init(self, choice):
+        mock_obj = mock.Mock()
+        choice.return_value = mock_obj
+        pantera.run("one", "two")
+        mock_obj.assert_called_with("one", "two")
 
 
 class EC2TestCase(unittest.TestCase):
