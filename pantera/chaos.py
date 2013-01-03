@@ -1,14 +1,14 @@
 import random
 
 
-class Terminate(object):
+class EC2(object):
     def __init__(self, access, secret):
         self.access = access
         self.secret = secret
 
     def choice(self):
         """
-        choice a vm
+        choose a vm
         """
         vms = self.conn.get_all_instances()
         vm = random.choice(vms)
@@ -21,6 +21,8 @@ class Terminate(object):
         from boto.ec2.connection import EC2Connection
         self.conn = EC2Connection(self.access, self.secret)
 
+
+class Terminate(EC2):
     def terminate(self):
         """
         terminates a vm
@@ -33,26 +35,7 @@ class Terminate(object):
         self.terminate()
 
 
-class Stop(object):
-    def __init__(self, access, secret):
-        self.access = access
-        self.secret = secret
-
-    def choice(self):
-        """
-        choice a vm
-        """
-        vms = self.conn.get_all_instances()
-        vm = random.choice(vms)
-        return vm.instances[0].id
-
-    def connect(self):
-        """
-        creates an ec2 connection
-        """
-        from boto.ec2.connection import EC2Connection
-        self.conn = EC2Connection(self.access, self.secret)
-
+class Stop(EC2):
     def stop(self):
         """
         stops a vm
