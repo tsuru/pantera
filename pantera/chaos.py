@@ -1,27 +1,33 @@
 import random
 
 
-def connect(access, secret):
-    """
-    creates an ec2 connection
-    """
-    from boto.ec2.connection import EC2Connection
-    return EC2Connection(access, secret)
+class Terminate(object):
+    def __init__(self, access, secret):
+        self.access = access
+        self.secret = secret
 
+    def choice(self):
+        """
+        choice a vm
+        """
+        vms = self.conn.get_all_instances()
+        vm = random.choice(vms)
+        return vm.instances[0].id
 
-def destroy_vm(access, secret):
-    """
-    destroy a vm
-    """
-    conn = connect(access, secret)
-    vm = choice_vm(conn)
-    return conn.terminate_instances(instance_ids=[vm])
+    def connect(self):
+        """
+        creates an ec2 connection
+        """
+        from boto.ec2.connection import EC2Connection
+        self.conn = EC2Connection(self.access, self.secret)
 
+    def terminate(self):
+        """
+        terminates a vm
+        """
+        self.connect()
+        vm = self.choice()
+        return self.conn.terminate_instances(instance_ids=[vm])
 
-def choice_vm(conn):
-    """
-    choice a vm
-    """
-    vms = conn.get_all_instances()
-    vm = random.choice(vms)
-    return vm.instances[0].id
+    def execute(self):
+        self.terminate()
