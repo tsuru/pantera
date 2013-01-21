@@ -16,7 +16,7 @@ with open('requirements.txt') as reqs:
 setup(name="pantera",
       version=__version__,
       packages=find_packages(),
-      description="tool to add some chaos on tsuru",
+      description="tool to add some chaos on tsuru PaaS",
       author="timeredbull",
       author_email="timeredbull@corp.globo.com",
       install_requires=install_requires)
