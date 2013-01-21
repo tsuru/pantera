@@ -37,5 +37,7 @@ You can also run a specific action:
 
 To check the list of available actions:
 
+::
+
     >>> from pantera import list_actions
     >>> list_actions()
