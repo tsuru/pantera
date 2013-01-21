@@ -12,11 +12,15 @@ with open('requirements.txt') as reqs:
         if (line and not line.startswith('--'))
     ]
 
+long_description = None
+with (open('README.rst')) as readme:
+    long_description = readme.read()
 
 setup(name="pantera",
       version=__version__,
       packages=find_packages(),
       description="tool to add some chaos on tsuru PaaS",
+      long_description=long_description,
       author="timeredbull",
       author_email="timeredbull@corp.globo.com",
       install_requires=install_requires)
