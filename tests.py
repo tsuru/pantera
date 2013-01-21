@@ -44,6 +44,11 @@ class PanteraTestCase(unittest.TestCase):
         finally:
             del pantera._actions["mock"]
 
+    def test_run_invalid_action(self):
+        with self.assertRaises(pantera.UnknownAction) as cm:
+            pantera.run("something_unknown")
+        self.assertEqual("something_unknown", cm.exception._name)
+
 
 class EC2TestCase(unittest.TestCase):
 
