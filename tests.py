@@ -22,7 +22,7 @@ class RaisingSimulator(object):
         raise SimulatorCalled
 
 
-class PanterTestCase(unittest.TestCase):
+class PanteraTestCase(unittest.TestCase):
 
     @mock.patch("random.choice")
     def test_random_run_call(self, choice):
