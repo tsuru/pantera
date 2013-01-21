@@ -5,8 +5,8 @@
 import unittest
 import mock
 
-from pantera import chaos
 import pantera
+from pantera import chaos
 
 
 class SimulatorCalled(Exception):
@@ -14,6 +14,7 @@ class SimulatorCalled(Exception):
 
 
 class RaisingSimulator(object):
+
     def __init__(self, *args, **kwargs):
         pass
 
@@ -22,6 +23,7 @@ class RaisingSimulator(object):
 
 
 class PanterTestCase(unittest.TestCase):
+
     @mock.patch("random.choice")
     def test_run_call(self, choice):
         choice.return_value = RaisingSimulator
@@ -36,6 +38,7 @@ class PanterTestCase(unittest.TestCase):
 
 
 class EC2TestCase(unittest.TestCase):
+
     def test_init(self):
         ec2 = chaos.EC2("one", "two")
         self.assertEqual("one", ec2.access)
@@ -59,6 +62,7 @@ class EC2TestCase(unittest.TestCase):
 
 
 class RebootTestCase(unittest.TestCase):
+
     def test_reboot(self):
         from pantera import chaos
         vms = ["1"]
@@ -82,6 +86,7 @@ class RebootTestCase(unittest.TestCase):
 
 
 class StopTestCase(unittest.TestCase):
+
     def test_stop(self):
         vms = ["1"]
         conn = mock.Mock()
@@ -103,6 +108,7 @@ class StopTestCase(unittest.TestCase):
 
 
 class TerminateTestCase(unittest.TestCase):
+
     def test_terminate(self):
         vms = ["1"]
         conn = mock.Mock()
@@ -121,3 +127,20 @@ class TerminateTestCase(unittest.TestCase):
         terminate.terminate = mock.Mock()
         terminate()
         terminate.terminate.assert_called_with()
+
+
+class OSTestCase(unittest.TestCase):
+
+    @mock.patch("os.kill")
+    def test_kill(self, kill):
+        kill.return_value = True
+        o = chaos.OS()
+        o.kill(10000000, 15)
+        kill.assert_called_with(10000000, 15)
+
+    @mock.patch("os.kill")
+    def test_kill_default_value(self, kill):
+        kill.return_value = True
+        o = chaos.OS()
+        o.kill(10000000)
+        kill.assert_called_with(10000000, 9)

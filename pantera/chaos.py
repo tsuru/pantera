@@ -3,6 +3,7 @@
 # license that can be found in the LICENSE file.
 
 import random
+import os
 
 
 class EC2(object):
@@ -63,3 +64,12 @@ class Reboot(EC2):
 
     def __call__(self):
         self.reboot()
+
+
+class OS(object):
+
+    def kill(self, process, signal=9):
+        """
+        Kills a process, sending the given signal.
+        """
+        os.kill(process, signal)
