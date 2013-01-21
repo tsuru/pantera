@@ -1,18 +1,27 @@
-#pantera
+pantera
+=======
 
 pantera is a tool to test the resilience fo cloud applications based on ec2.
 
-##Installation
+Installation
+------------
+
+::
 
     $ pip install pantera
 
-##Usage
+Usage
+-----
 
 First open the interactive python shell:
+
+::
 
     $ python
 
 Then:
+
+::
 
     >>> from pantera import random_run
     >>> random_run("ec2-access-key", "ec2-secret-key")
@@ -20,6 +29,8 @@ Then:
 This will run a random action, using the given parameters.
 
 You can also run a specific action:
+
+::
 
     >>> from pantera import run
     >>> run("terminate", "ec2-access-key", "ec2-secret-key")
