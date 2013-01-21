@@ -7,6 +7,7 @@ import os
 
 
 class EC2(object):
+
     def __init__(self, access, secret):
         self.access = access
         self.secret = secret
@@ -28,6 +29,7 @@ class EC2(object):
 
 
 class Terminate(EC2):
+
     def terminate(self):
         """
         terminates a vm
@@ -41,6 +43,7 @@ class Terminate(EC2):
 
 
 class Stop(EC2):
+
     def stop(self):
         """
         stops a vm
@@ -54,6 +57,7 @@ class Stop(EC2):
 
 
 class Reboot(EC2):
+
     def reboot(self):
         """
         reboots a vm
