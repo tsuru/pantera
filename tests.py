@@ -134,13 +134,13 @@ class OSTestCase(unittest.TestCase):
     @mock.patch("os.kill")
     def test_kill(self, kill):
         kill.return_value = True
-        o = chaos.OS()
-        o.kill(10000000, 15)
+        k = chaos.Kill(10000000, 15)
+        k()
         kill.assert_called_with(10000000, 15)
 
     @mock.patch("os.kill")
     def test_kill_default_value(self, kill):
         kill.return_value = True
-        o = chaos.OS()
-        o.kill(10000000)
+        k = chaos.Kill(10000000)
+        k()
         kill.assert_called_with(10000000, 9)

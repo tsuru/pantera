@@ -70,10 +70,14 @@ class Reboot(EC2):
         self.reboot()
 
 
-class OS(object):
+class Kill(object):
 
-    def kill(self, process, signal=9):
+    def __init__(self, process, signal=9):
+        self._process = process
+        self._signal = signal
+
+    def __call__(self):
         """
         Kills a process, sending the given signal.
         """
-        os.kill(process, signal)
+        os.kill(self._process, self._signal)
