@@ -63,6 +63,9 @@ class EC2TestCase(unittest.TestCase):
 
 class RebootTestCase(unittest.TestCase):
 
+    def test_name(self):
+        self.assertEqual("reboot", chaos.Reboot.name)
+
     def test_reboot(self):
         from pantera import chaos
         vms = ["1"]
@@ -87,6 +90,9 @@ class RebootTestCase(unittest.TestCase):
 
 class StopTestCase(unittest.TestCase):
 
+    def test_name(self):
+        self.assertEqual("stop", chaos.Stop.name)
+
     def test_stop(self):
         vms = ["1"]
         conn = mock.Mock()
@@ -109,6 +115,9 @@ class StopTestCase(unittest.TestCase):
 
 class TerminateTestCase(unittest.TestCase):
 
+    def test_name(self):
+        self.assertEqual("terminate", chaos.Terminate.name)
+
     def test_terminate(self):
         vms = ["1"]
         conn = mock.Mock()
@@ -129,7 +138,10 @@ class TerminateTestCase(unittest.TestCase):
         terminate.terminate.assert_called_with()
 
 
-class OSTestCase(unittest.TestCase):
+class KillTestCase(unittest.TestCase):
+
+    def test_name(self):
+        self.assertEquals("kill", chaos.Kill.name)
 
     @mock.patch("os.kill")
     def test_kill(self, kill):

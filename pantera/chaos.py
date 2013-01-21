@@ -29,6 +29,7 @@ class EC2(object):
 
 
 class Terminate(EC2):
+    name = "terminate"
 
     def terminate(self):
         """
@@ -43,6 +44,7 @@ class Terminate(EC2):
 
 
 class Stop(EC2):
+    name = "stop"
 
     def stop(self):
         """
@@ -57,6 +59,7 @@ class Stop(EC2):
 
 
 class Reboot(EC2):
+    name = "reboot"
 
     def reboot(self):
         """
@@ -71,6 +74,7 @@ class Reboot(EC2):
 
 
 class Kill(object):
+    name = "kill"
 
     def __init__(self, process, signal=9):
         self._process = process
