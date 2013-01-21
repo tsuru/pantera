@@ -25,16 +25,24 @@ class RaisingSimulator(object):
 class PanterTestCase(unittest.TestCase):
 
     @mock.patch("random.choice")
-    def test_run_call(self, choice):
-        choice.return_value = RaisingSimulator
-        self.assertRaises(SimulatorCalled, pantera.run)
+    def test_random_run_call(self, choice):
+        pantera._actions["raising"] = RaisingSimulator
+        try:
+            choice.return_value = "raising"
+            self.assertRaises(SimulatorCalled, pantera.random_run)
+        finally:
+            del pantera._actions["raising"]
 
     @mock.patch("random.choice")
-    def test_run_init(self, choice):
+    def test_random_run_init(self, choice):
         mock_obj = mock.Mock()
-        choice.return_value = mock_obj
-        pantera.run("one", "two")
-        mock_obj.assert_called_with("one", "two")
+        pantera._actions["mock"] = mock_obj
+        try:
+            choice.return_value = "mock"
+            pantera.random_run("one", "two")
+            mock_obj.assert_called_with("one", "two")
+        finally:
+            del pantera._actions["mock"]
 
 
 class EC2TestCase(unittest.TestCase):

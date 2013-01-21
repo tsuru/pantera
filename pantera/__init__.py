@@ -8,7 +8,18 @@ import random
 
 __version__ = "0.1.1"
 
+_actions = {
+    chaos.Stop.name: chaos.Stop,
+    chaos.Reboot.name: chaos.Reboot,
+    chaos.Terminate.name: chaos.Terminate,
+    chaos.Kill.name: chaos.Kill,
+}
 
-def run(*args, **kwargs):
-    run_list = [chaos.Stop, chaos.Reboot, chaos.Terminate]
-    random.choice(run_list)(*args, **kwargs)()
+
+def run(name, *args, **kwargs):
+    _actions[name](*args, **kwargs)()
+
+
+def random_run(*args, **kwargs):
+    action = random.choice(_actions.keys())
+    run(action, *args, **kwargs)
