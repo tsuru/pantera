@@ -49,6 +49,9 @@ class PanteraTestCase(unittest.TestCase):
             pantera.run("something_unknown")
         self.assertEqual("something_unknown", cm.exception._name)
 
+    def test_list_actions(self):
+        self.assertEqual(pantera._actions, pantera.list_actions())
+
 
 class EC2TestCase(unittest.TestCase):
 

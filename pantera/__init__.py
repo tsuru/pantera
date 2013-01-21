@@ -16,6 +16,10 @@ _actions = {
 }
 
 
+def list_actions():
+    return _actions
+
+
 def run(name, *args, **kwargs):
     a = _actions.get(name)
     if a is None:
