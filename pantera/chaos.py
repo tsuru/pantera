@@ -3,7 +3,10 @@
 # license that can be found in the LICENSE file.
 
 import random
+import re
 import os
+
+pid_regexp = re.compile(r"^\d+$")
 
 
 class EC2(object):
@@ -85,3 +88,33 @@ class Kill(object):
         Kills a process, sending the given signal.
         """
         os.kill(self._process, self._signal)
+
+
+class RemoteKill(object):
+    name = "remote-kill"
+
+    def __init__(self, process, host, user,
+                 signal=9, priv_key=None, use_sudo=True):
+        proc = str(process)
+        self._process = proc
+        self._cmd = pid_regexp.match(proc) is not None and "kill" or "killall"
+        self._host = host
+        self._user = user
+        self._signal = signal
+        self._key = priv_key is not None and "-i %s" % priv_key or ""
+        self._sudo = use_sudo and "sudo" or ""
+
+    def __call__(self):
+        cmd = "ssh %(key)s -l %(user)s %(host)s " + \
+              "%(sudo)s %(cmd)s -%(signal)d %(process)s"
+        args = {
+            "key": self._key,
+            "user": self._user,
+            "host": self._host,
+            "sudo": self._sudo,
+            "cmd": self._cmd,
+            "signal": self._signal,
+            "process": self._process,
+        }
+        cmd = (cmd % args).replace("  ", " ")
+        os.system(cmd)

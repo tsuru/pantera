@@ -172,3 +172,50 @@ class KillTestCase(unittest.TestCase):
         k = chaos.Kill(10000000)
         k()
         kill.assert_called_with(10000000, 9)
+
+
+class RemoteKillTestCase(unittest.TestCase):
+
+    def test_name(self):
+        self.assertEqual("remote-kill", chaos.RemoteKill.name)
+
+    @mock.patch("os.system")
+    def test_remote_kill_pid_str(self, system):
+        system.return_value = True
+        rk = chaos.RemoteKill("123", "256.256.256.256", "root",
+                              priv_key="id_dsa", use_sudo=False, signal=15)
+        rk()
+        cmd = "ssh -i id_dsa -l root 256.256.256.256 kill -15 123"
+        system.assert_called_with(cmd)
+
+    @mock.patch("os.system")
+    def test_remote_kill_pid_int(self, system):
+        system.return_value = True
+        rk = chaos.RemoteKill(123, "256.256.256.256", "root", signal=15)
+        rk()
+        cmd = "ssh -l root 256.256.256.256 sudo kill -15 123"
+        system.assert_called_with(cmd)
+
+    @mock.patch("os.system")
+    def test_remote_kill_process_name(self, system):
+        system.return_value = True
+        rk = chaos.RemoteKill("mongod", "0.0.0.0", "ubuntu", signal=15)
+        rk()
+        cmd = "ssh -l ubuntu 0.0.0.0 sudo killall -15 mongod"
+        system.assert_called_with(cmd)
+
+    @mock.patch("os.system")
+    def test_remote_kill_default_signal(self, system):
+        system.return_value = True
+        rk = chaos.RemoteKill(123, "10.10.10.10", "root")
+        rk()
+        cmd = "ssh -l root 10.10.10.10 sudo kill -9 123"
+        system.assert_called_with(cmd)
+
+    @mock.patch("os.system")
+    def test_remote_kill_by_namedefault_signal(self, system):
+        system.return_value = True
+        rk = chaos.RemoteKill("mongod", "10.10.10.10", "root")
+        rk()
+        cmd = "ssh -l root 10.10.10.10 sudo killall -9 mongod"
+        system.assert_called_with(cmd)
