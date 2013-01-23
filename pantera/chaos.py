@@ -105,16 +105,9 @@ class RemoteKill(object):
         self._sudo = use_sudo and "sudo" or ""
 
     def __call__(self):
-        cmd = "ssh %(key)s -l %(user)s %(host)s " + \
-              "%(sudo)s %(cmd)s -%(signal)d %(process)s"
-        args = {
-            "key": self._key,
-            "user": self._user,
-            "host": self._host,
-            "sudo": self._sudo,
-            "cmd": self._cmd,
-            "signal": self._signal,
-            "process": self._process,
-        }
-        cmd = (cmd % args).replace("  ", " ")
-        os.system(cmd)
+        cmd = "ssh {key} -l {user} {host} " + \
+              "{sudo} {cmd} -{signal} {process}"
+        cmd = cmd.format(key=self._key, user=self._user, host=self._host,
+                         sudo=self._sudo, cmd=self._cmd, signal=self._signal,
+                         process=self._process)
+        os.system(cmd.replace("  ", " "))
