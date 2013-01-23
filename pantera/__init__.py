@@ -12,6 +12,7 @@ _actions = {
     chaos.Reboot.name: chaos.Reboot,
     chaos.Terminate.name: chaos.Terminate,
     chaos.Kill.name: chaos.Kill,
+    chaos.RemoteKill.name: chaos.RemoteKill,
 }
 
 
