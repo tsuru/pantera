@@ -5,7 +5,7 @@
 import chaos
 import random
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 _actions = {
     chaos.Stop.name: chaos.Stop,
