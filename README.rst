@@ -1,3 +1,6 @@
+.. image:: https://secure.travis-ci.org/globocom/pantera.png
+   :target: http://travis-ci.org/globocom/pantera
+
 pantera
 =======
 
