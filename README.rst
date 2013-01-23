@@ -4,7 +4,9 @@
 pantera
 =======
 
-pantera is a tool to test the resilience fo cloud applications based on ec2.
+Pantera is a tool to test the resilience of cloud applications. It's based on
+EC2 instances, and process management. It's able to destroy, stop and reboot
+instances, and also able to kill process locally and remotely.
 
 Installation
 ------------
