@@ -19,7 +19,7 @@ with (open('README.rst')) as readme:
 setup(name="pantera",
       version=__version__,
       packages=find_packages(),
-      description="tool to add some chaos on tsuru PaaS",
+      description="tool to add some chaos to tsuru PaaS",
       long_description=long_description,
       author="timeredbull",
       author_email="timeredbull@corp.globo.com",
