@@ -269,3 +269,26 @@ class UnknownActionTestCase(unittest.TestCase):
     def test_unicode(self):
         exc = pantera.UnknownAction("something")
         self.assertEqual(u"Unknown action: something.", unicode(exc))
+
+
+class ActionsTestCase(unittest.TestCase):
+
+    def test_stop_is_registered(self):
+        action = pantera._actions[chaos.Stop.name]
+        self.assertEqual(action, chaos.Stop)
+
+    def test_reboot_is_registered(self):
+        action = pantera._actions[chaos.Reboot.name]
+        self.assertEqual(action, chaos.Reboot)
+
+    def test_terminate_is_registered(self):
+        action = pantera._actions[chaos.Terminate.name]
+        self.assertEqual(action, chaos.Terminate)
+
+    def test_kill_is_registered(self):
+        action = pantera._actions[chaos.Kill.name]
+        self.assertEqual(action, chaos.Kill)
+
+    def test_remote_kill_is_registered(self):
+        action = pantera._actions[chaos.RemoteKill.name]
+        self.assertEqual(action, chaos.RemoteKill)
