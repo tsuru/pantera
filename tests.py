@@ -174,6 +174,19 @@ class KillTestCase(unittest.TestCase):
         kill.assert_called_with(10000000, 9)
 
 
+class SSHTestCase(unittest.TestCase):
+
+    def test_ssh_command_with_key(self):
+        ssh = chaos.SSH("123.123.123.123", "root", priv_key="id_dsa")
+        want = "ssh -i id_dsa -l root 123.123.123.123 ls -l"
+        self.assertEqual(want, ssh.command("ls -l"))
+
+    def test_ssh_command_without_key(self):
+        ssh = chaos.SSH("123.123.123.123", "root")
+        want = "ssh -l root 123.123.123.123 ls -l"
+        self.assertEqual(want, ssh.command("ls -l"))
+
+
 class RemoteKillTestCase(unittest.TestCase):
 
     def test_name(self):
