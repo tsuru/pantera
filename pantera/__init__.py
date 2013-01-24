@@ -13,6 +13,7 @@ _actions = {
     chaos.Terminate.name: chaos.Terminate,
     chaos.Kill.name: chaos.Kill,
     chaos.RemoteKill.name: chaos.RemoteKill,
+    chaos.UpstartStop.name: chaos.UpstartStop,
 }
 
 
