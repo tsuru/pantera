@@ -119,3 +119,15 @@ class RemoteKill(object):
         cmd = cmd.format(sudo=self._sudo, cmd=self._cmd, signal=self._signal,
                          process=self._process)
         os.system(self._ssh.command(cmd))
+
+
+class UpstartStop(object):
+    name = "upstart-stop"
+
+    def __init__(self, job, host, user, priv_key=None):
+        self._ssh = SSH(host, user, priv_key)
+        self._job = job
+
+    def __call__(self):
+        cmd = "sudo stop %s" % self._job
+        os.system(self._ssh.command(cmd))
