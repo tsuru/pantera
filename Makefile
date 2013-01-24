@@ -8,5 +8,5 @@ test-deps:
 	@pip install -qr test-requirements.txt --use-mirrors
 
 test: test-deps clean
-	@nosetests --with-coverage --cover-package=pantera -s .
+	@nosetests --with-coverage --cover-package=pantera --with-xunit -s .
 	@find . -name \*.py | xargs flake8
