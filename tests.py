@@ -232,3 +232,17 @@ class RemoteKillTestCase(unittest.TestCase):
         rk()
         cmd = "ssh -l root 10.10.10.10 sudo killall -9 mongod"
         system.assert_called_with(cmd)
+
+
+class UnknownActionTestCase(unittest.TestCase):
+
+    def test_is_exception(self):
+        assert issubclass(pantera.UnknownAction, Exception)
+
+    def test_str(self):
+        exc = pantera.UnknownAction("something")
+        self.assertEqual("Unknown action: something.", str(exc))
+
+    def test_unicode(self):
+        exc = pantera.UnknownAction("something")
+        self.assertEqual(u"Unknown action: something.", unicode(exc))
