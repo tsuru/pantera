@@ -11,14 +11,17 @@ pid_regexp = re.compile(r"^\d+$")
 
 class EC2(object):
 
-    def __init__(self, access, secret):
+    def __init__(self, access, secret, instance_id=None):
         self.access = access
         self.secret = secret
+        self.instance_id = instance_id
 
     def choice(self):
         """
         choose a vm
         """
+        if self.instance_id:
+            return self.instance_id
         vms = self.conn.get_all_instances()
         vm = random.choice(vms)
         return vm.instances[0].id

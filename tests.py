@@ -60,6 +60,10 @@ class EC2TestCase(unittest.TestCase):
         self.assertEqual("one", ec2.access)
         self.assertEqual("two", ec2.secret)
 
+    def test_init_with_instance_id(self):
+        ec2 = chaos.EC2("one", "two", instance_id="i-0800")
+        self.assertEqual("i-0800", ec2.instance_id)
+
     @mock.patch("random.choice")
     def test_choice(self, choice):
         instance = mock.Mock(id="1")
@@ -69,6 +73,16 @@ class EC2TestCase(unittest.TestCase):
         choice.return_value = reservation
         vm = ec2.choice()
         self.assertEqual("1", vm)
+
+    @mock.patch("random.choice")
+    def test_choice_with_instance_id(self, choice):
+        instance = mock.Mock(id="1")
+        reservation = mock.Mock(instances=[instance])
+        choice.return_value = reservation
+        ec2 = chaos.EC2("ak", "sk", instance_id="i-0800")
+        ec2.conn = mock.Mock()
+        vm = ec2.choice()
+        self.assertEqual("i-0800", vm)
 
     @mock.patch("boto.ec2.connection.EC2Connection")
     def test_connect(self, ec2con):
