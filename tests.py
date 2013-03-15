@@ -333,3 +333,7 @@ class ActionsTestCase(unittest.TestCase):
     def test_upstart_stop_is_registered(self):
         action = pantera._actions[chaos.UpstartStop.name]
         self.assertEqual(action, chaos.UpstartStop)
+
+    def test_initd_stop_is_registered(self):
+        action = pantera._actions[chaos.InitdStop.name]
+        self.assertEqual(action, chaos.InitdStop)
