@@ -134,3 +134,15 @@ class UpstartStop(object):
     def __call__(self):
         cmd = "sudo stop %s" % self._job
         os.system(self._ssh.command(cmd))
+
+
+class InitdStop(object):
+    name = "initd-stop"
+
+    def __init__(self, job, host, user, priv_key=None):
+        self._ssh = SSH(host, user, priv_key)
+        self._job = job
+
+    def __call__(self):
+        cmd = "sudo /etc/init.d/{0} stop".format(self._job)
+        os.system(self._ssh.command(cmd))

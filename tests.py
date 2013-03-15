@@ -271,6 +271,29 @@ class UpstartStopTestCase(unittest.TestCase):
         system.assert_called_with(cmd)
 
 
+class InitdStopTestCase(unittest.TestCase):
+
+    def test_name(self):
+        self.assertEqual("initd-stop", chaos.InitdStop.name)
+
+    @mock.patch("os.system")
+    def test_stop_with_key(self, system):
+        system.return_value = True
+        uss = chaos.InitdStop("mysql", "10.10.10.10",
+                              "root", priv_key="id_dsa")
+        uss()
+        cmd = "ssh -i id_dsa -l root 10.10.10.10 sudo /etc/init.d/mysql stop"
+        system.assert_called_with(cmd)
+
+    @mock.patch("os.system")
+    def test_stop_without_key(self, system):
+        system.return_value = True
+        uss = chaos.InitdStop("mysql", "12.12.12.12", "root")
+        uss()
+        cmd = "ssh -l root 12.12.12.12 sudo /etc/init.d/mysql stop"
+        system.assert_called_with(cmd)
+
+
 class UnknownActionTestCase(unittest.TestCase):
 
     def test_is_exception(self):
