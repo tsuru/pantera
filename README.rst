@@ -1,5 +1,5 @@
-.. image:: https://secure.travis-ci.org/globocom/pantera.png
-   :target: http://travis-ci.org/globocom/pantera
+.. image:: https://secure.travis-ci.org/tsuru/pantera.png
+   :target: http://travis-ci.org/tsuru/pantera
 
 pantera
 =======
