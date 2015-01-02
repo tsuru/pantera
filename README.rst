@@ -26,7 +26,7 @@ First open the interactive python shell:
 
 Then:
 
-::
+.. code-block:: pycon
 
     >>> from pantera import random_run
     >>> random_run("ec2-access-key", "ec2-secret-key")
@@ -35,14 +35,14 @@ This will run a random action, using the given parameters.
 
 You can also run a specific action:
 
-::
+.. code-block:: pycon
 
     >>> from pantera import run
     >>> run("terminate", "ec2-access-key", "ec2-secret-key")
 
 To check the list of available actions:
 
-::
+.. code-block:: pycon
 
     >>> from pantera import list_actions
     >>> list_actions()
