@@ -17,6 +17,7 @@ with (open('README.rst')) as readme:
     long_description = readme.read()
 
 setup(name="pantera",
+      url='https://github.com/tsuru/pantera',
       version=__version__,
       packages=find_packages(),
       description="tool to add some chaos to tsuru PaaS",
