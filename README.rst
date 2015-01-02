@@ -1,6 +1,10 @@
 .. image:: https://secure.travis-ci.org/tsuru/pantera.png
    :target: http://travis-ci.org/tsuru/pantera
 
+.. image:: https://pypip.in/version/pantera/badge.svg
+    :target: https://pypi.python.org/pypi/pantera/
+    :alt: Latest Version
+
 pantera
 =======
 
